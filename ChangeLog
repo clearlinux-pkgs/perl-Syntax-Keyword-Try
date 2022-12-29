@@ -1,0 +1,196 @@
+Revision history for Syntax-Keyword-Try
+
+0.28    2022-12-08
+        [CHANGES]
+         * Account for the new structure of ->cop_warnings in perl v5.37.6
+         * Updated to latest hax/ support files; accounting for newPADxVOP in
+           latest bleadperl
+
+0.27    2022-02-22
+        [CHANGES]
+         * Updates to support Feature::Compat::Try 0.05 with new `finally {}`
+           blocks
+
+0.26    2021-10-12
+        [CHANGES]
+         * Many internal updates to hax/ support files
+
+        [BUGFIXES]
+         * Fix try { return } to work correctly in all contexts without
+           upsetting -DDEBUGGING perls
+
+0.25    2021-06-01
+        [CHANGES]
+         * Rewrite parsing logic to use XS::Parse::Keyword 0.06
+         * Removed the new-deprecated `try do { ... }` experimental syntax
+         * Updated docs now that 5.34 is officially released, including
+           `use feature 'try'`.
+
+0.24    2021-05-10
+        [CHANGES]
+         * Deprecate the `try do { ... }` (experimental) syntax now that
+           try-in-do works reliably. It will be removed soon because it gets
+           in the way of converting the parser logic to XS::Parse::Keyword
+         * Add documentation about the core `use feature 'try'` and
+           Feature::Compat::Try module
+         * Added an initial attempt at B::Deparse logic
+
+0.23    2021-03-27
+        [CHANGES]
+         * Unit tests and documentation of the handling of the final-value
+           semantics of `do { try ... }`
+         * Also mention core's `feature 'try'` in documentation
+         * Gives notice that the experimental 'try_value' feature is now
+           discouraged and will eventually be removed
+
+0.22    2021-03-26
+        [CHANGES]
+         * Preserve wantarray context within the try {} block (RT133616)
+         * List-context `try do {}` now works fine as well
+         * Apply unit-testing for RT134790
+
+0.21    2021-01-22
+        [CHANGES]
+         * Add some import configuration options required to make
+           Feature::Compat::Try work. Currently unit-tested but undocumented.
+
+0.20    2020-11-24
+        [BUGFIXES]
+         * Fix for perl 5.14 by #include'ing hax/ files in the right order
+
+0.19    2020-11-24
+        [CHANGES]
+         * Avoid the core Off() and Bit() macros as they were removed after
+           perl 5.33.3
+         * Support :experimental(try_value) to activate and silence the
+           warning
+         * Add documentation about the scalar context propagation issue of
+           RT124229
+
+0.18    2020-08-01
+        [CHANGES]
+         * De-experiment the `catch ($var)` syntax
+
+0.17    2020-07-31
+        [CHANGES]
+         * Ensure that `catch ($var)` does not retain exception value after
+           block exit
+         * Docs fixes for clarity on experimental status of `catch ($var)`
+
+        [BUGFIXES]
+         * Ensure sv_isa_sv is a macro for aTHX on threaded perls
+
+0.16    2020-07-23
+        [CHANGES]
+         * Provide the `:experimental` import tag as a nicer way to silence
+           experimental warnings
+
+        [BUGFIXES]
+         * Don't name a variable `class` because it upsets some C compilers
+           (RT133043)
+
+0.15    2020-07-21
+        [CHANGES]
+         * Experimental typed `catch (VAR ...)` conditions
+
+0.14    2020-07-07
+        [CHANGES]
+         * Optional experimental syntax of `catch (VAR)` instead of previous
+           experimental `catch my VAR`
+         * Mark `catch my VAR` as deprecated
+         * Added explicit use VERSION declarations to every perl file
+
+0.13    2020-06-29
+        [BUGFIXES]
+         * Pack correct MANIFEST to include hax/ files
+
+0.12    2020-06-29
+        [CHANGES]
+         * Optional and experimental allocation of a new lexical under
+           `catch my $VAR` syntax (RT130702). However, this syntax may not
+           survive long, as part of the ongoing typed catch design work.
+
+        [BUGFIXES]
+         * Work around perl versions prior to 5.22 built with -DDEBUGGING
+           getting upset about new*OP() being invoked with OP_CUSTOM
+           (RT128562)
+
+0.11    2019-09-07
+        [CHANGES]
+         * Use wrap_keyword_plugin() instead of direct access to
+           PL_keyword_plugin
+        [BUGFIXES]
+         * Build OP_ENTER/OP_LEAVE structure the correct way so perl 5.31.3
+           doesn't crash
+         * Fix OP_NEXT/OP_LAST/OP_REDO mangling for perl 5.31.3 to avoid
+           CPU spin (RT129975)
+
+0.10    2019-06-13
+        [CHANGES]
+         * Added experimental value-semantic expression form (RT121267)
+         * Document that the module works nicely with Future::AsyncAwait
+         * Ignore import symbols `catch` and `finally`
+
+        [BUGFIXES]
+         * Fixed spelling mistakes in documentation (patch from debian)
+           (RT124140)
+
+0.09    2017-11-08 14:33:19
+        [BUGFIXES]
+         * Make module loading thread-safe on perls 5.16 and above. (RT123547)
+           Safety on perl 5.14 is still an unsolved problem.
+
+0.08    2017-09-14 17:26:20
+        [BUGFIXES]
+         * Handle the OpSIBLING of an OP_{NEXT,LAST,REDO} correctly (RT123040)
+
+0.07    2017-08-13 23:11:39
+        [CHANGES]
+         * Capture 80await+try.t unit test from Future-AsyncAwait
+         * Improved implementation of OP_PUSHFINALLY to help make try/finally
+           inside async/await subs work
+
+        [BUGFIXES]
+         * Make 'eval { try { return ... } }' work correctly
+         * Make 'return LIST' inside try{} blocks work correctly (RT122795)
+            - with thanks to Zefram for code inspiration
+
+0.06    2017/06/06 14:59:30
+        [CHANGES]
+         * Clarify documentation about the behaviour of try {} blocks without
+           catch {}; include comparison with other modules
+
+        [BUGFIXES]
+         * Fix typo in #ifdef test (RT119709)
+         * Restore C89 compatibility again (RT119665)
+
+0.05    2017/06/05 14:04:06
+        [CHANGES]
+         * Add a SEE ALSO link pointing at the value-semantics RT ticket
+
+        [BUGFIXES]
+         * Fix cLISTOP->op_last field to keep DEBUGGING builds happy
+           (RT119095)
+
+0.04    2016/11/25 15:06:18
+        [CHANGES]
+         * Removed stale documentation about now-fixed warnings from
+           next/last/redo
+
+        [BUGFIXES]
+         * Fix C code for C89 compatibility (RT118950)
+         * Localise $@ around try/catch (RT118415)
+
+0.03    2016/11/24 10:27:45
+        [CHANGES]
+         * Default import of 'try' keyword
+         * Suppress 'exiting' warning around next/last/redo inside a try block
+         * Don't bother outputting a Makefile.PL
+
+0.02    2016/09/06 21:29:25
+        [BUGFIXES]
+         * Use OpSIBLING() macro for compatibility for perl 5.25.x
+         * Documentation fixes
+
+0.01    2016/09/05 22:19:33
+        First version, released on an unsuspecting world.
