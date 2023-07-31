@@ -5,7 +5,7 @@
 #
 Name     : perl-Syntax-Keyword-Try
 Version  : 0.29
-Release  : 3
+Release  : 4
 URL      : https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Syntax-Keyword-Try-0.29.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Syntax-Keyword-Try-0.29.tar.gz
 Summary  : 'a C<try/catch/finally> syntax for perl'
@@ -13,6 +13,7 @@ Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Syntax-Keyword-Try-license = %{version}-%{release}
 Requires: perl-Syntax-Keyword-Try-perl = %{version}-%{release}
+Requires: perl(XS::Parse::Keyword)
 BuildRequires : buildreq-cpan
 BuildRequires : perl(XS::Parse::Keyword::Builder)
 # Suppress stripping binaries
