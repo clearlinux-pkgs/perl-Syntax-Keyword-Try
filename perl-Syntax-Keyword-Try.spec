@@ -5,7 +5,7 @@
 #
 Name     : perl-Syntax-Keyword-Try
 Version  : 0.29
-Release  : 6
+Release  : 7
 URL      : https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Syntax-Keyword-Try-0.29.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Syntax-Keyword-Try-0.29.tar.gz
 Summary  : 'a C<try/catch/finally> syntax for perl'
