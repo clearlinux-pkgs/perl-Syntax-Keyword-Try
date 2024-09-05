@@ -1,2 +1,3 @@
-0.29
+0.30
+perl(File::ShareDir)
 perl(XS::Parse::Keyword::Builder)
