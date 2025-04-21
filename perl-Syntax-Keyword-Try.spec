@@ -7,7 +7,7 @@
 #
 Name     : perl-Syntax-Keyword-Try
 Version  : 0.30
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Syntax-Keyword-Try-0.30.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Syntax-Keyword-Try-0.30.tar.gz
 Summary  : 'a C<try/catch/finally> syntax for perl'
